@@ -6,8 +6,8 @@ from PIL import Image
 def main(argv) :   
 
     object = argv[1]
-    jpg_dir_path = './' + str(object) + "_RAW"
-    json_dir_path = './VL_' + str(object) + "_0"
+    jpg_dir_path = './raw/' + str(object) + "_RAW"
+    json_dir_path = './raw/VL_' + str(object) + "_0"
     json_files = os.listdir(json_dir_path)
 
     for i in range(len(json_files)) : 
@@ -28,18 +28,16 @@ def main(argv) :
                 img = Image.open(jpg_dir_path + "/" + raw_file_name + '.jpg')
                 crop_img = img.crop(xy)
                 crop_img.save('./' + object + '_IMG/' + raw_file_name + '_' + str(idx) + '.jpg')
-                img_txt = open('./' + object + '_IMG/' + raw_file_name + '_' + str(idx) + '.txt', 'w')
-                img_txt.write("category_id : " + str(image_raw['id']) + "\n")
-                img_txt.write('border box\n')
-                for i in range(len(image_raw['bbox'])) :
-                    img_txt.write(str(image_raw['bbox'][i]) + "\n")
-                img_txt.close()
+                # img_txt = open('./' + object + '_IMG/' + raw_file_name + '_' + str(idx) + '.txt', 'w')
+                # img_txt.write("category_id : " + str(image_raw['id']) + "\n")
+                # img_txt.write('border box\n')
+                # for i in range(len(image_raw['bbox'])) :
+                #     img_txt.write(str(image_raw['bbox'][i]) + "\n")
+                # img_txt.close()
         except Exception as e:
             print(raw_file_name)
             print(e)
             continue
-            # crop_img.show()
-        # break
 
 
 if __name__ == "__main__" :
